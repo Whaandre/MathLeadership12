@@ -1,0 +1,45 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex	
+\usepackage{amsmath}
+%\usepackage{systeme}
+\usepackage{amsthm}	
+\usepackage{amssymb}
+\newtheorem{proposition}{Proposition}
+\newtheorem{identity}{Identity}
+
+%SetFonts
+
+%SetFonts
+
+
+\title{Math Journal}
+\author{Andrew Ha}
+\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section*{Combinatorial Proof}
+\begin{proposition} For positive integers $n$ and $k$ with $n=2k, \frac{n!}{2!^k}$ is an integer. \end{proposition}
+\emph{Proof.}  Consider the $n$ symbols: $x_1, x_1, x_2, x_2, \cdots, x_k, x_k$.
+The number of arrangements of all these $n = 2k$ symbols is an integer that equals
+\[
+\frac{n!}{\underbrace{2! 2! \cdots 2!}_{\text{k factors of 2!}}} = \frac{n!}{2!^k}
+\]
+
+I learned this from the first day of class in MACM 101. This is an example of proving that a value is an integer by obtaining that value from counting something. You can also use combinatorics in proof by double counting:
+\begin{identity} 
+\[
+2^n = \sum_{k=0}^{n}  \binom{n}{k}
+\]
+\end{identity}
+
+This can be proved by counting the number of subsets of a set with $n$ elements. 
+
+Teststeststs
+%\subsection{}
+\end{document}  
