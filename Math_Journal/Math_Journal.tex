@@ -1,4 +1,4 @@
-\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
 \usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
 %\geometry{landscape}                		% Activate for rotated page geometry
@@ -9,13 +9,14 @@
 %\usepackage{systeme}
 \usepackage{amsthm}	
 \usepackage{amssymb}
+\usepackage{hyperref}
 \newtheorem{proposition}{Proposition}
 \newtheorem{identity}{Identity}
 
-%SetFonts
-
-%SetFonts
-
+\hypersetup{
+	colorlinks=true,
+	urlcolor=blue
+}
 
 \title{Math Journal}
 \author{Andrew Ha}
@@ -24,20 +25,45 @@
 \begin{document}
 \maketitle
 \section*{Combinatorial Proof}
+\textbf{09/10/2024}
 \begin{proposition} For positive integers $n$ and $k$ with $n=2k, \frac{n!}{2!^k}$ is an integer. \end{proposition}
 \emph{Proof.}  Consider the $n$ symbols: $x_1, x_1, x_2, x_2, \cdots, x_k, x_k$.
 The number of arrangements of all these $n = 2k$ symbols is an integer that equals
 \[
 \frac{n!}{\underbrace{2! 2! \cdots 2!}_{\text{k factors of 2!}}} = \frac{n!}{2!^k}
 \]
-
-I learned this from the first day of class in MACM 101. This is an example of proving that a value is an integer by obtaining that value from counting something. You can also use combinatorics in proof by double counting:
+I learned this from the first day of class in MACM 101. This is an example of proving that a value is an integer by obtaining that value from counting something. Researching further, I also found out about double counting.\ It is based on the idea that counting the same objects in two different ways results in two different expressions, which must be equal to each other. 
 \begin{identity} 
 \[
 2^n = \sum_{k=0}^{n}  \binom{n}{k}
 \]
 \end{identity}
+For example, this identity can be proved by counting the number of subsets of a set $A$ with $n$ elements. One way to count this is noticing how you can either include or exclude each element, giving 2 choices for each of the $n$ elements. This gives $2^n$ subsets. Second way to count the number of subsets is summing up the number of subsets with $k$ elements where $k$ can be any integer from 0 to $n$. For each case, you would be choosing $k$ elements out of $n$ elements, so there are $\binom{n}{k}$ subsets.
+Summing up, the total number of subsets is $\sum_{k=0}^{n}  \binom{n}{k}$.\ Two expressions, $2^n$ and $\sum_{k=0}^{n}  \binom{n}{k}$, must be equal since they represent the same thing.
+\section*{Putnam 2002 B1}
+\textbf{09/11/2024}
+\\
+\noindent Here is a fun problem I wanted to share from the 2002 William Lowell Putnam Mathematics Competition.
+\begin{quote}
+B1. Shanille O'Keal shoots free throws on a basketball court. She hits
+the first and misses the second, and thereafter the probability that
+she hits the next shot is equal to the proportion of shots she
+has hit so far. What is the probability she hits exactly 50 of
+her first 100 shots?
+\end{quote}
+This problem doesn't require much of advanced mathematics, yet it is simple and tricky. Here's a solution I like:\\
 
-This can be proved by counting the number of subsets of a set with $n$ elements. 
-%\subsection{}
+\emph{Solution.} The probability of $n$th success is the proportion of shots she has hit so far, which is $\frac{n - 1}{\text{\# of shots so far}}$. On the other hand, the probability of $n$th miss is $1 - \frac{\text{\# of successes so far}}{\text{\# of shots so far}} = \frac{\text{\# of shots so far}}{\text{\# of shots so far}} - \frac{\text{\# of shots so far} - (n - 1)}{\text{\# of shots so far}} = \frac{n-1}{\text{\# of shots so far}}$. For her to hit exactly 50 of her first 100 shots, she has to hit exactly 49 shots and miss exactly 49 shots. Consider the probability of one case where she hits 49 shots consecutively then misses 49 shots consecutively: 
+\[
+\underbrace{\frac{1}{2} \times \frac{2}{3} \times \frac{3}{4} \times \frac{4}{5} \times \cdots \times \frac{49}{50}}_\text{49 successes} \times \underbrace{\frac{1}{51} \times \frac{2}{52} \times \frac{3}{53} \times \frac{4}{54} \cdots \times \frac{49}{99}}_\text{49 misses} = \frac{49!^2}{99!}
+\]
+Here, the arrangement of shots does not affect the overall probability since the numerator will always be $49!^2$ as long as she hits 49 shots and misses 49 shots, and the denominator will always be 99!. Therefore, multiplying the probability of single case by the number of arrangements will give us the answer. The number of arrangements of 49 shots and 49 misses is $\frac{98!}{49!^2}$ since there are 49 duplicates of 2 cases. Multiplying two numbers yields
+\[
+\frac{49!^2}{99!} \cdot \frac{98!}{49!^2} = \frac{1}{99}
+\]
+The probability she hits exactly 50 of her first 100 shots is $\frac{1}{99}$.
+\section*{Two Random Distributions}
+\textbf{09/16/2024}
+\\
+This is from a \href{https://www.youtube.com/watch?v=ga9Qk38FaHM}{YouTube video} I watched recently. 
 \end{document}  
