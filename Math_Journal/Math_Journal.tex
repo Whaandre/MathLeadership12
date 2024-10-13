@@ -358,4 +358,67 @@ $S(n)/n$ can never reach 4. If the lowest number of $n$'s prime divisors is 4, t
 \frac{S(n)}{n} < \frac{2}{1} \cdot \frac{3}{2} \cdot \frac{5}{4} \cdot \frac{7}{6} = \frac{35}{8} > 4
 \]
 This means $S(n)/n$ can get arbitrarily close to $\dfrac{35}{8}$, which is bigger than 4. Thus, the lowest number of $n$'s prime divisors for the sum of the divisors of $n$ to be greater than $4n$ is 4.
+\section*{Necessity and Sufficiency}
+\textbf{10/08/2024}\\
+While learning about logic, I came across how necessity and sufficiency can describe a conditional or implicational relationships. I kept confusing the two, so I am just reviewing them to make sure I understand.
+
+Say $p, q$ are two arbitrary statements. A conditional statement made of them, "If $p$, then $q$" can be written as $p \rightarrow q$, and the truth table looks like the following:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$p$ & $q$ & $p \rightarrow q$\\
+\hline
+T & T & T\\
+\hline
+T & F & F\\
+\hline
+F & T & T\\
+\hline
+F & F & T\\
+\hline
+\end{tabular}
+\end{center}
+If we say $p$ is necessary for $q$, that means if $q$ is true, then $p$ must be true. This corresponds to "if $q$, then $p$".
+\[ p \text{ is necessary for } q \Leftrightarrow q \rightarrow p\]
+If we say $p$ is sufficient for $q$, that means if $p$ is true, then $q$ will be true. This corresponds to "if $p$, then $q$".
+\[ p \text{ is sufficient for } q \Leftrightarrow p \rightarrow q\]
+\section*{Counting Multiples}
+\textbf{10/11/2024}\\
+\begin{quote}
+How many positive multiples of 3 or 5 or 134 are there that are less than 2015?
+\end{quote}
+I solved this problem while preparing for the next week's Math Challengers meeting. At first, I simply counted using the inclusion-exclusion principle which generalizes the method of counting the size of union of multiple sets. Here's the principle:
+\begin{quote}
+To find the cardinality of the union of $n$ sets:
+\begin{enumerate}
+\item Include the cardinalities of the sets.
+\item Exclude the cardinalities of the pairwise intersections.
+\item Include the cardinalities of the triple-wise intersections.
+\item Continue, until the cardinality of the $n$-tuple-wise intersection is included (if $n$ is odd) or excluded ($n$ even).
+\end{enumerate}
+\end{quote}
+Cardinality refers to the size of a set, or the number of elements in a set. I applied this principle to the problem:
+\begin{eqnarray*}
+&&[\text{(\# of multiples of 3)} + \text{(\# of multiples of 5)} + \text{(\# of multiples of 134)}]\\
+& - &[\text{(\# of multiples of $3\cdot5$)} + \text{(\# of multiples of $3\cdot134$)} + \text{(\# of multiples of $5\cdot134$)}]\\
+& + &\text{(\# of multiples of $3\cdot5\cdot134$)}\\
+& = &(671 + 402 + 15)\\
+& - &(134 + 5 + 3)\\
+& + &1\\
+& = &947
+\end{eqnarray*}
+However, this method required too much calculations and took too long for a competition. I felt like there should be a better way. Then, I thought of the Euler's totient function $\phi(n)$ which counts the numbers less than $n$ that are co-prime with $n$. 
+\begin{quote}
+For each $p_i$ with $1 \leq i \leq k$ being distinct prime factors of $n$,
+\[\phi(n) = n\left(1-\frac{1}{p_1}\right)\left(1-\frac{1}{p_2}\right)\cdots\left(1-\frac{1}{p_k}\right)\]
+\end{quote}
+Using a similar method, I counted the numbers less than 2010 that are not multiples of 3 or 5 or 134:
+\[2010 \cdot \frac{2}{3} \cdot \frac{4}{5} \cdot \frac{133}{134} = 1064.\]
+Subtracting from 2010, I get the number of multiples of 3 or 5 or 134 less than or equal to 2010:
+\[2010 - 1064 = 946.\]
+Now, only 2013 from 2011 to 2014 is a multiple of 3 or 5 or 134, so add one, getting the same answer of 947.
+
+To generalize when and how to use this method, say the question asks you to find how many positive multiples of $m_1$, $m_2$, \dots, or $m_k$ $(m_i \leq n)$ are there that are less than $n$. You can use this method If 1 is the only common positive divisor of all of $m_i$, and if the product of all $m_i$, say $M$, is smaller than $n$. Then, find $x$, a multiple of $M$ that is smaller than but is the closest to $n$. Calculate
+\[x\left(\frac{m_1-1}{m_1}\right)\left(\frac{m_2-1}{m_2}\right)\cdots\left(\frac{m_k-1}{m_k}\right)\]
+to count the numbers that are not multiple of any $m_i$, then subtract from $x$ to count only the multiples. Now, count how many multiples are in the range from $x+1$ to $n-1$ using any other methods.
 \end{document}
