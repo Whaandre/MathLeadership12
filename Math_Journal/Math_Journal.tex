@@ -421,4 +421,47 @@ Now, only 2013 from 2011 to 2014 is a multiple of 3 or 5 or 134, so add one, get
 To generalize when and how to use this method, say the question asks you to find how many positive multiples of $m_1$, $m_2$, \dots, or $m_k$ $(m_i \leq n)$ are there that are less than $n$. You can use this method If 1 is the only common positive divisor of all of $m_i$, and if the product of all $m_i$, say $M$, is smaller than $n$. Then, find $x$, a multiple of $M$ that is smaller than but is the closest to $n$. Calculate
 \[x\left(\frac{m_1-1}{m_1}\right)\left(\frac{m_2-1}{m_2}\right)\cdots\left(\frac{m_k-1}{m_k}\right)\]
 to count the numbers that are not multiple of any $m_i$, then subtract from $x$ to count only the multiples. Now, count how many multiples are in the range from $x+1$ to $n-1$ using any methods. This can be quite useful.
+\section*{Lockbox Submission}
+\textbf{10/13/2024}\\
+I submitted this problem with a little change for the lockbox:
+\begin{quote}
+$a, b, c$ are positive integers such that
+\[\frac{1}{a}+\frac{1}{b}+\frac{1}{c}<1.\]
+Prove that
+\[\frac{1}{a}+\frac{1}{b}+\frac{1}{c}\leq\frac{41}{42}.\]
+\end{quote}
+This is from the problem of the week for the last year's COMC.
+
+First, I assume $\dfrac{1}{a} \geq \dfrac{1}{b} \geq \dfrac{1}{c} (a\leq b\leq c)$ without loss of generality because of complete symmetry (You can always switch their order to satisfy the condition). I simply consider all the cases:
+\pagebreak
+\begin{tabbing}
+\=$a=1$\=\\
+\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\geq1$\=\\
+\=$a=2$\=\\
+\>\>$b<3$\=\\
+\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\geq1$\=\\
+\>\>$b=3$\=\\
+\>\>\>$c<7$\=\\
+\>\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\geq1$\=\\
+\>\>\>$c\geq7$\=\\
+\>\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\leq\dfrac{1}{2}+\dfrac{1}{3}+\dfrac{1}{7}=\dfrac{41}{42}\leq\dfrac{41}{42}$\=\\
+\>\>$b=4$\=\\
+\>\>\>$c<5$\=\\
+\>\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\geq1$\=\\
+\>\>\>$c\geq5$\=\\
+\>\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\leq\dfrac{1}{2}+\dfrac{1}{4}+\dfrac{1}{5}=\dfrac{19}{20}\leq\dfrac{41}{42}$\=\\
+\>\>$b\geq5$\=\\
+\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\leq\dfrac{1}{2}+\dfrac{1}{5}+\dfrac{1}{5}=\dfrac{9}{10}\leq\dfrac{41}{42}$\=\\
+\=$a=3$\=\\
+\>\>$b=3$\=\\
+\>\>\>$c<4$\=\\
+\>\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\geq1$\=\\
+\>\>\>$c\geq4$\=\\
+\>\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\leq\dfrac{1}{3}+\dfrac{1}{3}+\dfrac{1}{4}=\dfrac{11}{12}\leq\dfrac{41}{42}$\=\\
+\>\>$b\geq4$\=\\
+\>\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\leq\dfrac{1}{3}+\dfrac{1}{4}+\dfrac{1}{4}=\dfrac{5}{6}\leq\dfrac{41}{42}$\=\\
+\=$a\geq4$\=\\
+\>\>$\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}\leq\dfrac{1}{4}+\dfrac{1}{4}+\dfrac{1}{4}=\dfrac{3}{4}\leq\dfrac{41}{42}$\=\\
+\end{tabbing}
+You can see that the inequality we are trying to prove is true or the initial condition is false in every case, so it is proven.
 \end{document}
