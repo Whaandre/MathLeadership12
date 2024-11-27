@@ -581,4 +581,116 @@ If $a$ is an odd integer, $a(a+2) = (2k+1)(2k+3) = 4k^2 + 8k + 3 = 4(k^2 + 2k) +
 
 Now count the number of integer $k$ that satifies $1 \leq a,b \leq 2011$. $k \geq 1$ since $b = 0$ if $k = 0$. $b$ grows faster than $a$, so check the bound only with $b$. If $k=43$, $b=1935$, and if $k=44$, $b=2024$. Thus, $1 \leq k \leq 43$. There are 43 pairs of postive integers (a, b) with $1 \leq a, b \leq 2011$ for which every root of $f(f(x)) - x$ is an integer.
 \end{enumerate}
+\section*{COMC 2024 B4}
+\textbf{11/02/2024}\\
+Here is a problem from this year's COMC that I thought was interesting.
+\begin{quote}
+Initially, the integer 80 is written on a blackboard. At each step, the integer $x$ on the
+blackboard is replaced with an integer chosen uniformly at random among $[0, x-1]$, unless
+$x = 0$, in which case it is replaced by an integer chosen uniformly at random among $[0, 2024]$.
+Let $P(a, b)$ be the probability that after $a$ steps, the integer on the board is $b$. Determine
+\[ \lim_{a \rightarrow \infty} \frac{P(a, 80)}{P(a, 2024)}\]
+\end{quote}
+The official solution is not out yet, but here is how I solved it:
+
+Consider $P(a, 2024)$. For the integer to be 2024 after $a$ steps, the integer must be 0 after $a-1$ steps, and 2024 must be chosen uniformly at random among $[0, 2024]$ (2025 integers).
+\[P(a, 2024) = P(a-1, 0) \cdot \frac{1}{2025}\]
+Now, consider $P(a, 2023)$. There are two ways for the integer to be 2023 after $a$ steps. 2023 can be chosen among $[0, 2024]$ after the integer on the previous step was 0, or 2023 can be chosen among $[0, 2023]$ after the integer on the previous step was 2024.
+\[P(a, 2023) = P(a-1, 0) \cdot \frac{1}{2025} + P(a-1, 2024) \cdot \frac{1}{2024}\]
+Since $\displaystyle \lim_{a \rightarrow \infty} a = \lim_{a \rightarrow \infty} a-1$, these two limits are also equivalent. \[ \lim_{a \rightarrow \infty} P(a, 2024) = \lim_{a \rightarrow \infty} P(a-1, 2024)\]
+We are interested in only interested in $P(a, b)$ as $a$ goes to infinity, so assume all $P(a, b)$ are $\lim_{a \rightarrow \infty} P(a, b)$.
+\begin{eqnarray*}
+P(a, 2023) &=& P(a-1, 0) \cdot \dfrac{1}{2025} + P(a-1, 2024) \cdot \dfrac{1}{2024}\\
+ &=& P(a-1, 0) \cdot \dfrac{1}{2025} + P(a-1, 0) \cdot \dfrac{1}{2025} \cdot \dfrac{1}{2024}\\
+ &=& P(a-1, 0) (\dfrac{1}{2025} + \dfrac{1}{2025} \cdot \dfrac{1}{2024})\\
+ &=& P(a-1, 0) \cdot \dfrac{1}{2024}.\\
+ \end{eqnarray*}
+ Similarly, 
+\begin{eqnarray*}
+P(a, 2022) &=& P(a-1, 0) \cdot \dfrac{1}{2025} + P(a-1, 2024) \cdot \dfrac{1}{2024} + P(a-1, 2023) \cdot \dfrac{1}{2023}\\
+ &=& P(a-1, 0) \cdot \dfrac{1}{2025} + P(a-1, 0) \cdot \dfrac{1}{2025} \cdot \dfrac{1}{2024} + P(a-1, 0) \cdot \dfrac{1}{2024} \cdot \dfrac{1}{2023}\\
+ &=& P(a-1, 0) (\dfrac{1}{2025} + \dfrac{1}{2025} \cdot \dfrac{1}{2024} + \dfrac{1}{2024} \cdot \dfrac{1}{2023})\\
+ &=& P(a-1, 0) \cdot \dfrac{1}{2023}.\\
+\end{eqnarray*}
+We can notice that $\displaystyle \lim_{a \rightarrow \infty} P(a, b) = P(a-1, 0) \cdot \frac{1}{b+1}$. Now prove it by induction:
+
+Let $S(n): \displaystyle \lim_{a \rightarrow \infty} P(a, n) = P(a-1, 0) \cdot \frac{1}{n+1}$.\\
+$\displaystyle S(2024): \lim_{a \rightarrow \infty} P(a, 2024) = P(a-1, 0) \cdot \dfrac{1}{2025}$ as shown before. $S(2024)$ is true.
+Assume $S(k+1), S(k+2), \dots , S(2024)$ are true, and consider $S(k): \displaystyle \lim_{a \rightarrow \infty} P(a, k) = P(a-1, 0) \cdot \frac{1}{k+1}$ for $0 \leq k \leq 2024$.
+\begin{eqnarray*}
+\displaystyle P(a, k) &=& P(a-1, 0) \cdot \frac{1}{2025} + \sum_{i=k+1}^{2024} P(a-1, i) \cdot \frac{1}{i}\\
+\displaystyle &=& P(a-1, 0) (\frac{1}{2025} + \sum_{i=k+1}^{2024} \frac{1}{i+1} \cdot \frac{1}{i})\\
+\displaystyle &=& P(a-1, 0) \cdot \frac{1}{k+1}\\
+\end{eqnarray*}
+$[S(k+1) \wedge S(k+2) \wedge \cdots \wedge S(2024)] \Rightarrow S(k).$\\
+By the Principle of Mathematical Induction, $\displaystyle \lim_{a \rightarrow \infty} P(a, n) = P(a-1, 0) \cdot \frac{1}{n+1}$ for all $0 \leq n \leq 2024$.
+
+Now, the desired limit can be evaluated.
+\[\lim_{a \rightarrow \infty} \frac{P(a, 80)}{P(a, 2024)} = \lim_{a \rightarrow \infty} \frac{\frac{1}{81}}{\frac{1}{2025}} = \frac{2025}{81} = 25.\]
+\pagebreak
+\section*{AMC 12A 2024 Problem 17}
+\textbf{11/09/2024}\\
+A fun problem I wanted to share from this year's AMC 12.
+\begin{quote}
+Integers $a$, $b$, and $c$ satisfy $ab + c = 100$, $bc + a = 87$, and $ca + b = 60$. What is $ab + bc + ca$?
+\begin{enumerate} [A)]
+\item 212
+\item 247
+\item 258
+\item 276
+\item 284
+\end{enumerate}
+\end{quote}
+This is how I solved it:
+\begin{center}
+\begin{tabular} {ccc}
+(1)&$ab + c = 100$&\\
+(2)&$bc + a = 87$&\\
+(3)&$ca + b = 60$&\\
+(4)&$ab + c + bc + a = 100 + 87$&(1)+(2)\\
+$\Leftrightarrow$&$(a+c)(b+1) = 187$&\\
+(5)&$bc + a + ca + b = 87 + 60$&(2)+(3)\\
+$\Leftrightarrow$&$(a+b)(c+1) = 147$&\\
+(6)&$ab + c + ca + b = 100 + 60$&(1)+(3)\\
+$\Leftrightarrow$&$(b+c)(a+1) = 160$&\\
+\end{tabular}
+\end{center}
+Notice that in all (4), (5), and (6), the multiplicands add up to $a+b+c+1$. Since $187 = 11 \cdot 17$ and both factors are prime, 11 + 17 = 28 has to be the sum of multiplicands. $147 = 21 \cdot 7$ and $160 = 20 \cdot 8$, so 28 does work. Now $ab + bc + ca = ab + bc + ca - (a + b + c) = 100 + 87 + 60 - (28 - 1) = 220$, but 220 is not one of the multiple choices. 
+
+Here, I realized that the sum can be negative, with $187 = -11 \cdot -17, 147 = -21 \cdot -7$, and $160 = -20 \cdot -8$. Letting the sum equal -28, $ab + bc + ca = ab + bc + ca - (a + b + c) = 100 + 87 + 60 - (-28 - 1) = 276$. The answer is D.
+\section*{Number of Transitive Relations}
+\textbf{11/16/2024}\\
+I was asked to find the number of transitive relations in a set with 3 elements. A relation $R$ is a set of ordered pairs $(a, b)$ which means $a$ is related to $b$ (does not mean $b$ is related to $a$). A transitive relation $R$ is a relation where $(a, b) \in R$ and $(b, c) \in R$ implies $(a, c) \in R$ as well. A relation in a set with 3 elements (say $a, b, c$) is a subset of
+\begin{eqnarray*}
+\{&(a, a), (a, b), (a, c)&\\
+&(b, a), (b, b), (b, c)&\\
+&(c, a), (c, b), (c, c)&\}.
+\end{eqnarray*}
+It was way harder than I expected. At first, I tried to come up with a combinatoric way of representing it, but I failed. After trying and thinking for a long time, I decided to analyze it case by case, separating the cases by the number of $(a, b)$ with $a \neq b$ in the relation.\\
+\begin{enumerate}
+\item No $(a, b)$ with $a \neq b$ in $R$.\\
+There are 3 $(a, a)$ that can be either included or not.\\
+$\therefore 2^3=8$ relations.\\
+\item 1 $(a, b)$ with $a \neq b$ in $R$.\\
+6 choices for $(a, b)$ with $a \neq b$, then any $(a, a)$ can be included or not.\\
+$\therefore 6 \cdot 2^3 = 48$ relations.\\
+\item 2 $(a, b)$ with $a \neq b$ in $R$.\\
+1) Either $(a, b), (a, c)$ or $(b, a), (c, a)$, and there are 3 choices for $a$. Then, any $(a, a)$ can be included or not.\\
+2) $(a, b), (b, a), (a, a), (b, b)$, and there are 3 choices for $a, b$ (unordered). Then, $(c, c)$ can be included or not.\\
+$\therefore 2 \cdot 3 \cdot 2^3 + 3 \cdot 2= 48 + 6 = 54$ relations.\\
+\item 3 $(a, b)$ with $a \neq b$ in $R$.\\
+6 choices for $(a, b), (b, c), (a, c)$, and any $(a, a)$ can be included or not.\\
+$\therefore 6 \cdot 2^3 = 48$ relations.\\
+\item 4 $(a, b)$ with $a \neq b$ in $R$.\\
+1) Three choices for $(a, b), (b, c), (a, c), (b, a), (a, a), (b, b)$, and $(c, c)$ can be included or not.\\
+2) Three choices for $(a, b), (b, c), (a, c), (c, b), (b, b), (c, c)$, and $(a, a)$ can be included or not.\\
+$\therefore 3 \cdot 2 + 3 \cdot 2 = 12$ relations.\\
+\item 5 $(a, b)$ with $a \neq b$ in $R$.\\
+If $(a, b)$ is not in $R$, $(a, c), (c, b)$ are in $R$ so $(a, b)$ must be in $R$. None.\\
+$\therefore 0$ relation.\\
+\item 6 $(a, b)$ with $a \neq b$ in $R$.\\
+All $(a, b)$ are included, and all $(a, a)$ must be included as well since $(a, b), (b, a)$ are in $R$.\\
+$\therefore 1$ relation.\\
+\end{enumerate}
+In total, there are $8 + 48 + 54 + 48 + 12 + 0 + 1 = 171$ transitive relations.
 \end{document}
