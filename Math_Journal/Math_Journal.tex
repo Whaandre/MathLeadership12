@@ -693,4 +693,61 @@ All $(a, b)$ are included, and all $(a, a)$ must be included as well since $(a, 
 $\therefore 1$ relation.\\
 \end{enumerate}
 In total, there are $8 + 48 + 54 + 48 + 12 + 0 + 1 = 171$ transitive relations.
+\section*{Making Prime with Prime}
+\textbf{01/05/2025}
+\begin{quote}
+Find all prime numbers that can be written as $p^q+q^p$ with primes $p, q$.
+\end{quote}
+I saw this problem on \href{https://youtu.be/a_jRo2_scLI}{YouTube}, and tried to solve it.
+
+First, the smallest possible value of $p^q + q^p$ is $2^2 + 2^2 = 8$, so $p^q + q^p \geq 8$. Thus, it must be odd for it to be a prime number. If $p$ and $q$ have the same parity, then $p^q + q^p$ is an even number, so $p$ and $q$ must have different parity. 2 is the only even prime, so 2 must be one of them. $p$ and $q$ are interchangeable, so say $p$ is 2 and $q$ is an odd prime.
+
+Now, we find all prime numbers that can be written as $2^q + q^2$ with an odd prime $q$. Consider the expression modulo 3. $2^q = (-1)^q \text{ (mod } 3)= -1 \text{ (mod } 3)$ since $q$ is odd.
+\begin{itemize}
+\item If $q = 1$ (mod 3), $q^2 = 1$ (mod 3) $\Rightarrow 2^q + q^2 = -1 + 1$ (mod 3) = 0 (mod 3).
+\item If $q = 2$ (mod 3) = $-1$ (mod 3), $q^2 = 1$ (mod 3) $\Rightarrow 2^q + q^2 = -1 + 1$ (mod 3) = 0 (mod 3).
+\item If $q = 0$ (mod 3), $q^2 = 0$ (mod 3) $\Rightarrow 2^q + q^2 = -1 + 0$ (mod 3) = -1 (mod 3).
+\end{itemize}
+Thus, $q$ must be 0 (mod 3) or $2^q + q^2$ will be a multiple of 3 (greater than 8) which is not prime. The only prime number that is 0 (mod 3) is 3, so consider $2^3 + 3^2 = 17$. 17 is prime, and we conclude that it is the only prime that can be written as $p^q + q^p$ with primes $p, q$. 
+\section*{AM-GM Inequality}
+\textbf{01/18/2025}
+\begin{quote}
+Let $a, b, c$ be real numbers, which are not all equal, such that
+\[a + b + c = \frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 3.\]
+Prove that at least one of $a, b, c$ is negative.
+\end{quote}
+This problem can be proved easily using the inequality of arithmetic and geometric means which states that the arithmetic mean of non-negative real numbers is equal to or greater than the geometric mean of the same numberes. For two numbers $x$ and $y$, that is \[\frac{x+y}{2} \geq \sqrt{xy}.\] 
+If $y=\dfrac{1}{x}$, 
+\begin{eqnarray*}
+&\dfrac{x+\dfrac{1}{x}}{2} &\geq \sqrt{x \cdot \dfrac{1}{x}}\\
+\Rightarrow &x + \dfrac{1}{x} &\geq 2.
+\end{eqnarray*}
+We notice that $a + \dfrac{1}{a} + b + \dfrac{1}{b} + c + \dfrac{1}{c} = 6$. Suppose $a, b, c$ are all non-negative, then each $a + \dfrac{1}{a}, b + \dfrac{1}{b}, c + \dfrac{1}{c}$ are equal to or greater than 2. They must sum to 6, so they all have to equal to 2. $x+\dfrac{1}{x} = 2$ if and only if $x=1$, so $a=b=c=1$. However, $a, b, c$ are all different, so we reach a contradiction. At least one of $a, b, c$ has to be negative.
+\section*{$\sqrt{2}$}
+\textbf{01/22/2025}
+\begin{quote}
+Prove that $\sqrt{2}$ is always between $\dfrac{a}{b}$ and $\dfrac{a+2b}{a+b}$ for positive integers $a, b$. Which one is it closer to?
+\end{quote}
+This problem taught me an interesting way to show if a number is in an interval. If $x$ is between $A$ and $B$, then $(x-A)(x-B)$ will always be negative since $(x-A)$ and $(x-B)$ will have a opposite sign. If $x$ is outside the interval, they will have the same sign, so the expression will be positive.
+
+Using this, we check the sign of $(\sqrt{2}-\dfrac{a}{b})(\sqrt{2}-\dfrac{a+2b}{a+b})$.
+\begin{eqnarray*}
+&(\sqrt{2}-\dfrac{a}{b})(\sqrt{2}-\dfrac{a+2b}{a+b})\\
+=&(\dfrac{\sqrt{2}b-a}{b})(\dfrac{\sqrt{2}a+\sqrt{2}b-a-2b}{a+b})\\
+=&(\dfrac{\sqrt{2}b-a}{b})(\dfrac{(\sqrt{2}-1)a+(\sqrt{2}-2)b}{a+b})\\
+=&(\dfrac{\sqrt{2}b-a}{b})(\dfrac{(\sqrt{2}-1)a-(\sqrt{2}-1)\sqrt{2}b}{a+b})\\
+=&(\dfrac{\sqrt{2}b-a}{b})(\dfrac{(\sqrt{2}-1)(a-\sqrt{2}b)}{a+b})\\
+=&-\dfrac{(\sqrt{2}b-a)^2(\sqrt{2}-1)}{(b)(a+b)}
+\end{eqnarray*}
+$(\sqrt{2}b-a)^2$ and $\sqrt{2}-1$ are positive, and $b$ and $a+b$ are positive as well since we know $a$ and $b$ are positive. Thus, $(\sqrt{2}-\dfrac{a}{b})(\sqrt{2}-\dfrac{a+2b}{a+b})$ is negative and $\sqrt{2}$ is always between $\dfrac{a}{b}$ and $\dfrac{a+2b}{a+b}$ for positive integers $a, b$.
+
+ Now, to see which one it is closer to, we check if $\dfrac{|\sqrt{2}-\dfrac{a}{b}|}{|\sqrt{2}-\dfrac{a+2b}{a+b}|}$ is always bigger than or smaller than 1. If it's bigger than 1, that means $\sqrt{2}$ is closer to $\dfrac{a+2b}{a+b}$, and otherwise if it's smaller than 1.
+\begin{eqnarray*}
+&\dfrac{|\sqrt{2}-\dfrac{a}{b}|}{|\sqrt{2}-\dfrac{a+2b}{a+b}|}\\\\
+=&\left|\dfrac{\dfrac{\sqrt{2}b-a}{b}}{\dfrac{(\sqrt{2}-1)(a-\sqrt{2}b)}{a+b}}\right|\\\\
+=&\left|\dfrac{\dfrac{1}{b}}{\dfrac{\sqrt{2}-1}{a+b}}\right|\\\\
+=&\left|\dfrac{a+b}{(\sqrt{2}-1)b}\right|\\\\
+=&\left|\dfrac{(\sqrt{2}+1)(a+b)}{b}\right|\\\\
+\end{eqnarray*}
+Since $\sqrt{2}+1>1$ and $a$ is positive, the absolute value is always greater than 1. Thus, $\sqrt{2}$ is always closer to $\dfrac{a+2b}{a+b}$ than $\dfrac{a}{b}$. 
 \end{document}
