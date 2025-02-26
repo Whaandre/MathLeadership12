@@ -43,7 +43,7 @@ I learned this from the first day of class in MACM 101. This is an example of pr
 2^n = \sum_{k=0}^{n}  \binom{n}{k}
 \]
 \end{identity}
-For example, this identity can be proved by counting the number of subsets of a set $A$ with $n$ elements. One way to count this is noticing how you can either include or exclude each element, giving 2 choices for each of the $n$ elements. This gives $2^n$ subsets. Second way to count the number of subsets is summing up the number of subsets with $k$ elements where $k$ can be any integer from 0 to $n$. For each case, you would be choosing $k$ elements out of $n$ elements, so there are $\binom{n}{k}$ subsets.
+For example, this identity can be proved by counting the number of subsets of a set $A$ with $n$ elements. One way to count this is noticing how you can either include or exclude each element, giving 2 choices for each of the $n$ elements. This gives $2^n$ subsets. Second way to count the number of subsets is summing up the number of subsets with $k$ elements where $k$ can be any integer from 0 to $n$. For each case, you would be choosing $k$ elements out of $n$ elements, so there are t$\binom{n}{k}$ subsets.
 Summing up, the total number of subsets is $\sum_{k=0}^{n}  \binom{n}{k}$.\ Two expressions, $2^n$ and $\sum_{k=0}^{n}  \binom{n}{k}$, must be equal since they represent the same thing.
 \section*{Putnam 2002 B1}
 \textbf{09/11/2024}
@@ -773,4 +773,112 @@ In $(a, b, c)$, $a$ and $b$ are interchangable and can be positive or negative. 
 \item $x+1 = 20$, $2x-y = 15$: $x=19$, $y=23, 53$. 2 pairs.
 \end{itemize}
 Adding them up, $0+1+1+2+1+2=7$ pairs.
+\section*{Prime Arrangement}
+\textbf{02/05/2025}
+\begin{quote}
+Is it possible to arrange the numbers $1, 2,\dots, 54^2$ in a $54 \times 54$ grid such that any two vertically or horizontally adjacent cells are relatively prime?
+\end{quote}
+This is a question from \href{https://cms.math.ca/wp-content/uploads/2025/02/repechage-2025-problems.pdf}{CMO Repêchage 2025}. and I solved it using the fact that two integers with a difference of 1 or a sum of some prime number are relatively prime. It is possible to arrange the numbers so that any two horizontally adjacent cells have a difference of 1, and that any two vertically adjacent cells have a sum equal to some prime number. This will make sure that any adjacent cells are relative prime. Number the rows and the columns starting from 1, left to right and top to bottom. In a cell on row $2k-1$ and column $c$, put $54(k-1)+c$. In a cell on row $2k$ and column $c$, put $54(54-k)+55-c$.
+
+We check that any adjacent two cells are relatively prime by looking at the neighbors of an arbitrary cell on row $2k$ and column $c$:
+\begin{center}
+\addtolength{\leftskip} {-1cm}
+\begin{tabular} {c|c|c|c|}
+Row/Column&$c-1$&$c$&$c+1$\\
+\hline
+2k-1&$54(k-1)+c-1$&$54(k-1)+c$&$54(k-1)+c+1$\\
+\hline
+2k&$54(54-k)+55-c+1$&$54(54-k)+55-c$&$54(54-k)+55-c-1$\\
+\hline
+2k+1&$54(k)+c-1$&$54(k)+c$&$54(k)+c+1$\\
+\hline
+\end{tabular}
+\end{center}
+We see that any two horizontally adjacent cells differ by 1, so they are relatively prime. For any two vertically adjacent cells with odd row on top, they sum to $54 \cdot 53 + 55 = 2,917$ which is prime number, so they are relatively prime as well. Lastly, for any two vertically adjacent cells with even row on top, they sum to $54 \cdot 54 + 55 = 2,971$ which is prime number, so they are relatively prime as well.
+\section*{Exponent Rules}
+\textbf{02/17/2025}
+\begin{quote}
+$a, b$ are natural numbers that satisfy
+\[8a^ab^b=27a^bb^a.\]
+What is the value of $a^2 + b^2$?
+\end{quote}
+I saw this on \href{https://www.youtube.com/watch?v=gPyttK0DseA}{YouTube}. It looked very challenging on the first look, but it turned out to be simpler when I actually tried it. 
+
+Rearranging,
+\begin{eqnarray*}
+8a^ab^b &=& 27 a^bb^a\\
+\frac{8}{27} &=& \frac{a^bb^a}{a^ab^b}\\
+\frac{8}{27} &=& \frac{a^b}{b^b} \cdot \frac{b^a}{a^a}\\
+\frac{8}{27} &=& \left(\frac{a}{b}\right)^b \left(\frac{b}{a}\right)^a\\
+\left(\frac{2}{3}\right)^3 &=& \left(\frac{a}{b}\right)^{b-a}\\
+\end{eqnarray*}
+First, $a$ and $b$ are interchangable looking at the original equation, and we can check that $a \neq b$. Thus, without loss of generality, $b>a$. Since $a, b$ are natural numbers, $b-a$ should be a factor of 3.
+
+If $b-a=1$, it follows that $\dfrac{a}{b} = \dfrac{8}{27}$. Substituting $b = a+1$ and solving for $a$,
+\begin{eqnarray*}
+\dfrac{a}{a+1} &=& \dfrac{8}{27}\\
+27a &=& 8(a+1)\\
+19a &=& 8\\
+a &=& \dfrac{8}{19}
+\end{eqnarray*}
+$a=\dfrac{8}{19}$ is not a natural number, so $b-a\neq1$.
+
+If $b-a=3$, it follows that $\dfrac{a}{b} = \dfrac{2}{3}$. Substituting $b = a+3$ and solving for $a$,
+\begin{eqnarray*}
+\dfrac{a}{a+3} &=& \dfrac{2}{3}\\
+3a &=& 2(a+3)\\
+a &=& 6\\
+\end{eqnarray*}
+$a=6, b=9$ satisfies the equation.
+
+Finally, $a^2+b^2 = 6^2+9^2 = 117$.
+\section*{Average of Products}
+\textbf{02/22/2025}
+\begin{quote}
+Find the value of $n$ given that the average of all possible products $ab$, where $a$ and $b$ are positive integers less than or equal to $n$, is 2025.
+\end{quote}
+I saw this problem while invigilating the Math Challengers competition. A similar approach to calculating the sum of the factors of a certain number is needed to solve this easily.
+
+If you expand $(1+2+3+ \cdots + n)(1+2+3+ \cdots + n)$, each term will be a possible product $ab$ so the expression is equivalent to the sum of all the products. There are $n^2$ possible products, so divide it by $n^2$ to get the average:
+\begin{eqnarray*}
+&\dfrac{(1+2+3+ \cdots + n)(1+2+3+ \cdots + n)}{n^2}\\
+=&\dfrac{\left(\dfrac{n(n+1)}{2}\right)^2}{n^2}\\
+=&\dfrac{n^2(n+1)^2}{4n^2}\\
+=&\dfrac{(n+1)^2}{4}\\
+\end{eqnarray*}
+Find the value of $n$ for which the average is 2025:
+\begin{eqnarray*}
+\dfrac{(n+1)^2}{4}&=&2025\\
+(n+1)^2&=&45^2 \cdot 2^2\\
+(n+1)&=&45 * 2\\
+n&=&89\\
+\end{eqnarray*}
+When $n=89$, the average of all possible products $ab$, where $a$ and $b$ are positive integers less than or equal to $n$, is 2025.
+\section*{Making Squares}
+\textbf{02/25/2025}
+\begin{quote}
+Determine the largest integer $m$ for which $2^m + m^2$ is a perfect square.
+\end{quote}
+This is a question from Waterloo Scholarship Paper, and below is how I solved it. I'm wondering if there are other solutions.
+
+The largest integer $m$ for which $2^m + m^2$ is a perfect square is 6. We see that $2^6+6^2 = 100 = 10^2$ is indeed a perfect square. Now, suppose there exists an integer $m$ greater than 6 that makes $2^m + m^2$ equal to a perfect square. Since $2^m>0$ when $m>0$, let $2^m + m^2 = (m+n)^2$ for some $n>0$. Rearranging,
+\begin{eqnarray*}
+2^m + m^2 &=& (m+n)^2\\
+2^m + m^2 &=& m^2 + 2nm + n^2\\
+2^m &=& 2nm + n^2\\
+2^m &=& n(2m + n)\\
+\end{eqnarray*}
+$n(2m + n)$ is even if and only if $n$ is even, and $2^m$ is even for $m>0$. Thus, $n$ must be even. Let $n=2k$, then $2^m = 2k(2m+2k) = 4k(m+k)$, and it follows that $2^{m-2} = k(m+k)$. Since $m>6$, $k$ and $m+k$ must be powers of 2. $k$ cannot be 1 since $2^{m-2}=m+1$ is never true for all integer $m>6$ ($2^{6-2} \neq 6+1$ and LHS increases faster than RHS), so $k$ is even. Thus, $m$ must be even as well for $k+m$ to be a power of 2. Let $m=2x$, then $m^2+2^m=(2x)^2 + 2^{2x} = (2x)^2 + (2^x)^2$. This sum must be greater than or equal to $(2^x+1)^2$, the next perfect square after $(2^x)^2$. Rearranging,
+\begin{eqnarray*}
+(2x)^2 + (2^x)^2 &\geq& (2^x+1)^2\\
+(2x)^2 + (2^x)^2 &\geq& (2^x)^2 +2(2^x) + 1\\
+(2x)^2 &\geq& 2(2^x) + 1\\
+\end{eqnarray*}
+This inequality is false for all $x \geq 7$ because $(2 \cdot 7)^2 = 196 \geq 2 (2^7) + 1 = 257$ is false and the RHS increases faster than the LHS. Since $m=2x>6$, we have $3<x<7$. Check all possible values of $m$ between the interval:
+\begin{itemize}
+\item $x=4: (2 \cdot 4)^2 + 2^{2 \cdot 4} = 320$ is not a perfect square.
+\item $x=5: (2 \cdot 5)^2 + 2^{2 \cdot 5} = 1124$ is not a perfect square.
+\item $x=6: (2 \cdot 6)^2 + 2^{2 \cdot 6} = 4240$ is not a perfect square.
+\end{itemize}
+Therefore, no $m>6$ makes $2^m + m^2$ a perfect square. 6 is the largest integer $m$ that makes $2^m + m^2$ a perfect square.
 \end{document}
